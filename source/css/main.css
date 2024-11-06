@@ -1,0 +1,366 @@
+/*
+	@modCssClasses
+	@customTag: uploadimage-box
+		@cssMod: mod_clean
+		@cssMod: mod_small
+	@customTag: uploadimage-display
+	--theme-errorBackgroundColor 		rgba(255, 0, 0, 0.2)
+	--theme-errorFont 					rgba(255, 68, 68, 1)
+	--theme-highlightedBackgroundColor 	rgba(0, 0, 0, 0.1)
+	--theme-importantDetail 			rgba(255, 0, 255, 1)
+	--theme-inputBackgroundColor 		rgba(0, 0, 0, 0)
+	--theme-mainFont 					rgba(0, 0, 0, 1)
+	--theme-modal-backgroundColor 		rgba(34, 34, 34, 1)
+	--theme-modal-boxShadow 			rgba(0, 0, 0, 1)
+	--theme-modalText-color 			rgba(255, 255, 255, 1)
+	--theme-secondaryFont 				rgba(0, 0, 0, 0.6)
+	--theme-transitionDuration 			0.15s
+	--theme-whiteOnBlack1 				rgba(255, 255, 255, 0.1)
+*/
+
+
+
+
+uploadimage-box {
+	display: block;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 4rem;
+	margin-left: 0;
+	transition-property: background-color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	position: relative;
+	cursor: pointer;
+	background-color: var(--theme-highlightedBackgroundColor, rgba(0, 0, 0, 0.1));
+	overflow: hidden;
+	min-height: 6rem;
+}
+
+uploadimage-box.mod_clean {
+	background-color: var(--theme-inputBackgroundColor, rgba(0, 0, 0, 0));
+	min-height: 4.2rem;
+}
+
+uploadimage-box.error {
+	background-color: var(--theme-errorBackgroundColor, rgba(255, 0, 0, 0.2));
+}
+
+uploadimage-box .loadingBar {
+	position: absolute;
+	left: 0;
+	height: 3px;
+	width: 0;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	transition-property: width, opacity;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	background-color: var(--theme-importantDetail, rgba(255, 0, 255, 1));
+	bottom: 0;
+}
+
+uploadimage-box input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+
+uploadimage-box.active input {
+	display: none;
+}
+
+uploadimage-box .visible {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	padding-top: 0.5rem;
+	padding-right: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 0.5rem;
+}
+
+uploadimage-box.mod_clean .visible {
+	margin-top: 0;
+	margin-right: 0.5rem;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+
+uploadimage-box .visible .textPart {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-top: 0.5rem;
+	padding-right: 0;
+	padding-bottom: 0.5rem;
+	padding-left: 0.5rem;
+}
+
+uploadimage-box .visible .textPart p {
+	font-size: 1rem;
+	color: var(--theme-mainFont, rgba(0, 0, 0, 1));
+	font-weight: 600;
+	transition-property: color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box .visible .textPart samp {
+	font-size: 0.8rem;
+	color: var(--theme-secondaryFont, rgba(0, 0, 0, 0.6));
+	transition-property: color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	line-height: 1.25;
+}
+
+uploadimage-box.error .visible .textPart samp {
+	color: var(--theme-errorFont, rgba(255, 68, 68, 1));
+	font-weight: 600;
+}
+
+uploadimage-box .visible .deleteIcon {
+	width: 2rem;
+	display: flex;
+	justify-content: center;
+	height: 2rem;
+	opacity: 0;
+	transition-property: background-color, box-shadow, opacity;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box.mod_clean .visible .deleteIcon {
+	margin-right: -0.5rem;
+	opacity: 1 !important;
+}
+
+uploadimage-box.active .visible .deleteIcon {
+	opacity: 0.5;
+}
+
+uploadimage-box.active .visible .deleteIcon:hover {
+	opacity: 1;
+}
+
+uploadimage-box .visible .deleteIcon svg {
+	width: 66%;
+	fill: var(--theme-mainFont, rgba(0, 0, 0, 1));
+	transition-property: fill;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box .visible .imagePart {
+	position: relative;
+	overflow: hidden;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	transition-property: border-radius, background-color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box input:focus ~ .visible .imagePart {
+	background-color: var(--theme-highlightedBackgroundColor, rgba(0, 0, 0, 0.1));
+}
+
+uploadimage-box.mod_clean:hover .visible .imagePart {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+uploadimage-box .visible .imagePart .placeholder {
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0.5rem;
+	width: 8rem;
+	height: 8rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--theme-highlightedBackgroundColor, rgba(0, 0, 0, 0.1));
+	transition-property: border-radius, background-color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box.mod_small .visible .imagePart .placeholder {
+	width: 6rem;
+	height: 6rem;
+}
+
+uploadimage-box.active .visible .imagePart .placeholder {
+	background-color: var(--theme-inputBackgroundColor, rgba(0, 0, 0, 0));
+}
+
+uploadimage-box .visible .imagePart img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 8rem;
+	height: 8rem;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0.5rem;
+	object-position: center;
+	object-fit: cover;
+	transition-property: border-radius;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box.mod_small .visible .imagePart img {
+	width: 6rem;
+	height: 6rem;
+}
+
+uploadimage-box .visible .imagePart .placeholder svg {
+	width: 2rem;
+	opacity: 0.5;
+	fill: var(--theme-mainFont, rgba(0, 0, 0, 1));
+	transition-property: fill;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-box.active .visible .imagePart .placeholder svg {
+	opacity: 0;
+}
+
+
+
+
+uploadimage-display {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: var(--theme-modal-boxShadow, rgba(0, 0, 0, 1));
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 6;
+}
+
+uploadimage-display img {
+	width: 90vw;
+	height: 90vh;
+	object-fit: contain;
+}
+
+uploadimage-display .controls {
+	position: absolute;
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	background-color: var(--theme-modal-backgroundColor, rgba(34, 34, 34, 1));
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	box-shadow: 0 0 1rem var(--theme-modal-boxShadow, rgba(0, 0, 0, 1));
+	padding-top: 0.25rem;
+	padding-right: 0.25rem;
+	padding-bottom: 0.25rem;
+	padding-left: 0.25rem;
+	top: -5rem;
+	transition-property: top;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-display .controls button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 6rem;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	padding-top: 0.25rem;
+	padding-right: 0.25rem;
+	padding-bottom: 0.25rem;
+	padding-left: 0.25rem;
+	cursor: pointer;
+	background-color: var(--theme-inputBackgroundColor, rgba(0, 0, 0, 0));
+	transition-property: background-color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+uploadimage-display .controls button:hover {
+	background-color: var(--theme-whiteOnBlack1, rgba(255, 255, 255, 0.1));
+}
+
+uploadimage-display .controls .icon {
+	width: 2rem;
+	height: 2rem;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+uploadimage-display .controls .icon svg {
+	fill: var(--theme-modalText-color, rgba(255, 255, 255, 1));
+	width: 65%;
+}
+
+uploadimage-display .controls button p {
+	font-size: 0.84rem;
+	color: var(--theme-modalText-color, rgba(255, 255, 255, 1));
+}
+
+
+
+
+@media only screen and (max-device-width: 550px) {
+
+	uploadimage-box .visible .imagePart img {
+		transform-origin: 5.5rem;
+	}
+
+}
+
+
+
+
+@media only screen and (max-device-width: 350px) {
+
+	uploadimage-box .visible {
+		flex-direction: column-reverse;
+		align-items: center;
+		gap: 0;
+		padding: 1rem;
+	}
+
+	uploadimage-box .visible .textPart {
+		align-items: center;
+	}
+
+	uploadimage-box .visible .textPart p {
+		text-align: center;
+	}
+
+	uploadimage-box .visible .textPart samp {
+		text-align: center;
+	}
+
+	uploadimage-box .visible .imagePart img {
+		transform-origin: center;
+	}
+
+}
