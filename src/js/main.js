@@ -619,6 +619,52 @@ UploadImageStrip.prototype.setImage = function( url ) {
 };
 
 /**
+ * Sets image from a file input element (avoids URL dependency)
+ * @param {HTMLInputElement} inputElement 
+ */
+UploadImageStrip.prototype.setImageFromFileInput = function( inputElement ) {
+
+    if ( !inputElement.files || inputElement.files.length === 0 ) return;
+
+    // Clear existing image
+    if ( this._imagePartElem.querySelector( 'img' ) ) {
+
+        this._imagePartElem.removeChild( this._imagePartElem.querySelector( 'img' ) );
+
+    }
+
+    // Reset state
+    this._parentElem.classList.remove('active');
+
+    var file = inputElement.files[ 0 ];
+    var objectUrl = URL.createObjectURL( file );
+
+    // Direct file metadata
+    this._filepath = objectUrl; // Using blob URL as temporary path
+    this._filename = file.name; // Get actual filename from File object
+    this._value = file.name;
+
+    var img = new Image();
+    
+    img.onload = function() {
+
+        this._placeholderElem.innerHTML = '';
+        this._parentElem.classList.add( 'active' );
+        this._imagePartElem.appendChild( img );
+
+        if ( this._schema.subtitleactive ) {
+
+            this._subtitleElem.innerHTML = this._schema.subtitleactive;
+
+        }
+
+    }.bind(this); // Lock context to UploadImageStrip instance
+
+    img.src = objectUrl;
+
+};
+
+/**
  * 
  */
 UploadImageStrip.prototype.removeImage = function() {
