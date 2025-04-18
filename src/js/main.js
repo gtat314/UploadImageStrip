@@ -688,6 +688,16 @@ UploadImageStrip.prototype.removeImage = function() {
 
 /**
  * 
+ * @returns boolean
+ */
+UploadImageStrip.prototype.isActive = function() {
+
+    return this._parentElem.classList.contains( 'active' );
+
+};
+
+/**
+ * 
  * @param {String} title 
  */
 UploadImageStrip.prototype.setTitle = function( title ) {
