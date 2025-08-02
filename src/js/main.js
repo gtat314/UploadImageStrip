@@ -1,21 +1,10 @@
-/**
- * 
- * @employSchema
- * @eventListeners
- * @sensibleDefaults
- * @svgSrc
- * @documentation
- * @documentationApi
- * @iconUniformNames
- * @minimizeProperties
- * @objectifyEventListeners
- * @parentElementSelector
- * @distinctEventListeners
- * @propertiesElemUnderscore
- * @propertify
- * @methodNamingConventions
- * @propertyNamingConventions
- */
+var UploadImageStripIcons = {
+    'upload':           "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 16h-3v5h-2v-5H8l4-4 4 4zm3.479-5.908C19.267 6.141 16.006 3 12 3s-7.267 3.141-7.479 7.092A5.499 5.499 0 0 0 5.5 21H9v-2H5.5C3.57 19 2 17.43 2 15.5c0-2.797 2.479-3.833 4.433-3.72C6.266 7.562 8.641 5 12 5c3.453 0 5.891 2.797 5.567 6.78 1.745-.046 4.433.751 4.433 3.72 0 1.93-1.57 3.5-3.5 3.5H15v2h3.5a5.499 5.499 0 0 0 .979-10.908z'/></svg>",
+    'loading':          "<svg class='animateRotation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='m4.26 18.32-1.42 1.42a11.94 11.94 0 0 1 0-15.48l1.42 1.42a9.96 9.96 0 0 0 0 12.64zM22 12c0 2.4-.85 4.6-2.26 6.32l1.42 1.42a11.94 11.94 0 0 0 0-15.48l-1.42 1.42A9.96 9.96 0 0 1 22 12zM5.68 4.26a9.95 9.95 0 0 1 12.64 0l1.42-1.42a11.94 11.94 0 0 0-15.48 0l1.42 1.42zm12.64 15.48a9.95 9.95 0 0 1-12.64 0l-1.42 1.42a11.94 11.94 0 0 0 15.48 0l-1.42-1.42z'/></svg>",
+    'warning':          "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='#FF4747' d='M12 1 0 23h24L12 1zm-1 8h2v7h-2V9zm1 11.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z'/></svg>",
+    'previewClose':     "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><defs/><path d='M23 20.2L14.8 12 23 3.8 20.2 1 12 9.2 3.8 1 1 3.8 9.2 12 1 20.2 3.8 23l8.2-8.2 8.2 8.2z'/></svg>",
+    'previewTrash':     "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='#f55' d='M3 6v18h18V6H3zm5 14a1 1 0 0 1-2 0V10a1 1 0 0 1 2 0v10zm5 0a1 1 0 0 1-2 0V10a1 1 0 0 1 2 0v10zm5 0a1 1 0 0 1-2 0V10a1 1 0 0 1 2 0v10zm4-18v2H2V2h5.7c1 0 1.6-1.1 1.6-2h5.4c0 .9.7 2 1.6 2H22z'/></svg>"
+};
 
 
 
@@ -152,28 +141,28 @@ function UploadImageStrip( schema ) {
      * @property
      * @private
      */
-    this._iconUploadSrc = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 16h-3v5h-2v-5H8l4-4 4 4zm3.479-5.908C19.267 6.141 16.006 3 12 3s-7.267 3.141-7.479 7.092A5.499 5.499 0 0 0 5.5 21H9v-2H5.5C3.57 19 2 17.43 2 15.5c0-2.797 2.479-3.833 4.433-3.72C6.266 7.562 8.641 5 12 5c3.453 0 5.891 2.797 5.567 6.78 1.745-.046 4.433.751 4.433 3.72 0 1.93-1.57 3.5-3.5 3.5H15v2h3.5a5.499 5.499 0 0 0 .979-10.908z'/></svg>";
+    this._iconUploadSrc = UploadImageStripIcons[ 'upload' ];
 
     /**
      * 
      * @property
      * @private
      */
-    this._iconLoadingSrc = "<svg class='animateRotation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='m4.26 18.32-1.42 1.42a11.94 11.94 0 0 1 0-15.48l1.42 1.42a9.96 9.96 0 0 0 0 12.64zM22 12c0 2.4-.85 4.6-2.26 6.32l1.42 1.42a11.94 11.94 0 0 0 0-15.48l-1.42 1.42A9.96 9.96 0 0 1 22 12zM5.68 4.26a9.95 9.95 0 0 1 12.64 0l1.42-1.42a11.94 11.94 0 0 0-15.48 0l1.42 1.42zm12.64 15.48a9.95 9.95 0 0 1-12.64 0l-1.42 1.42a11.94 11.94 0 0 0 15.48 0l-1.42-1.42z'/></svg>";
+    this._iconLoadingSrc = UploadImageStripIcons[ 'loading' ];
 
     /**
      * 
      * @property
      * @private
      */
-    this._iconWarningSrc = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='#FF4747' d='M12 1 0 23h24L12 1zm-1 8h2v7h-2V9zm1 11.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z'/></svg>";
+    this._iconWarningSrc = UploadImageStripIcons[ 'warning' ];
 
     /**
      * 
      * @property
      * @private
      */
-    this._iconPreviewCloseSrc = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><defs/><path d='M23 20.2L14.8 12 23 3.8 20.2 1 12 9.2 3.8 1 1 3.8 9.2 12 1 20.2 3.8 23l8.2-8.2 8.2 8.2z'/></svg>";
+    this._iconPreviewCloseSrc = UploadImageStripIcons[ 'previewClose' ];
 
 
 
@@ -389,7 +378,7 @@ UploadImageStrip.prototype.createPreview = function() {
 
     if ( this._schema.hasOwnProperty( 'nodelete' ) === false ) {
 
-        var iconPreviewTrashSrc = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='#f55' d='M3 6v18h18V6H3zm5 14a1 1 0 0 1-2 0V10a1 1 0 0 1 2 0v10zm5 0a1 1 0 0 1-2 0V10a1 1 0 0 1 2 0v10zm5 0a1 1 0 0 1-2 0V10a1 1 0 0 1 2 0v10zm4-18v2H2V2h5.7c1 0 1.6-1.1 1.6-2h5.4c0 .9.7 2 1.6 2H22z'/></svg>";
+        var iconPreviewTrashSrc = UploadImageStripIcons[ 'previewTrash' ];
 
         var previewDeleteButtonElem = document.createElement( 'BUTTON' );
         previewControlsElem.appendChild( previewDeleteButtonElem );
