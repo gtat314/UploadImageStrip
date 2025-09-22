@@ -164,6 +164,55 @@ function UploadImageStrip( schema ) {
      */
     this._iconPreviewCloseSrc = UploadImageStripIcons[ 'previewClose' ];
 
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleClickDeleteSpanElem = this._evt_click_deleteSpan.bind( this );
+
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleChangeInputElem = this._evt_change_input.bind( this );
+
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleClickParentElem = this._evt_click_elem.bind( this );
+
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleClickDeletePreview = this._evt_click_deletePreview.bind( this );
+
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleClickClosePreview = this._evt_click_closePreview.bind( this );
+
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleClickPreviewWrap = this._evt_click_previewWrap.bind( this );
+
+    /**
+     * @property
+     * @private
+     * @type {CallableFunction}
+     */
+    this._handleLoadImgElem = this._evt_load_imgElem.bind( this );
+
 
 
 
@@ -248,7 +297,7 @@ function UploadImageStrip( schema ) {
         this._deleteSpanElem.innerHTML = this._iconPreviewCloseSrc;
         visibleElem.appendChild( this._deleteSpanElem );
 
-        this._deleteSpanElem.addEventListener( 'click', this._evt_click_deleteSpan.bind( this ) );
+        this._deleteSpanElem.addEventListener( 'click', this._handleClickDeleteSpanElem );
 
     }
 
@@ -292,8 +341,8 @@ function UploadImageStrip( schema ) {
     this._loadingBarElem.classList.add( 'loadingBar' );
     fragment.appendChild( this._loadingBarElem );
 
-    this._inputElem.addEventListener( 'change', this._evt_change_input.bind( this ) );
-    this._parentElem.addEventListener( 'click', this._evt_click_elem.bind( this ) );
+    this._inputElem.addEventListener( 'change', this._handleChangeInputElem );
+    this._parentElem.addEventListener( 'click', this._handleClickParentElem );
 
     this._parentElem.appendChild( fragment );
 
@@ -392,7 +441,7 @@ UploadImageStrip.prototype.createPreview = function() {
         previewDeleteTextElem.innerHTML = this._schema.previewDeleteText;
         previewDeleteButtonElem.appendChild( previewDeleteTextElem );
 
-        previewDeleteButtonElem.addEventListener( 'click', this._evt_click_deletePreview.bind( this ) );
+        previewDeleteButtonElem.addEventListener( 'click', this._handleClickDeletePreview );
 
     }
 
@@ -408,8 +457,8 @@ UploadImageStrip.prototype.createPreview = function() {
     previewCloseTextElem.innerHTML = this._schema.previewCloseText;
     previewCloseButtonElem.appendChild( previewCloseTextElem );
 
-    previewCloseButtonElem.addEventListener( 'click', this._evt_click_closePreview.bind( this ) );
-    this._previewWrapElem.addEventListener( 'click', this._evt_click_previewWrap.bind( this ) );
+    previewCloseButtonElem.addEventListener( 'click', this._handleClickClosePreview );
+    this._previewWrapElem.addEventListener( 'click', this._handleClickPreviewWrap );
 
     document.body.appendChild( fragment );
 
@@ -498,12 +547,7 @@ UploadImageStrip.prototype.setImageSet = function( options ) {
 
         var imgElem = new Image();
 
-        imgElem.addEventListener( 'load', function( evt ){
-
-            this._placeholderElem.innerHTML = '';
-            this._parentElem.classList.add( 'active' );
-
-        }.bind( this ) );
+        imgElem.addEventListener( 'load', this._handleLoadImgElem );
 
         if ( options.hasOwnProperty( 'thumbnail' ) ) {
 
@@ -588,12 +632,7 @@ UploadImageStrip.prototype.setImage = function( url ) {
     this._placeholderElem.innerHTML = this._iconLoadingSrc;
 
     var imgElem = new Image();
-    imgElem.addEventListener( 'load', function( evt ){
-
-        this._placeholderElem.innerHTML = '';
-        this._parentElem.classList.add( 'active' );
-
-    }.bind( this ) );
+    imgElem.addEventListener( 'load', this._handleLoadImgElem );
     imgElem.src = url;
     this._imagePartElem.appendChild( imgElem );
 
@@ -831,6 +870,18 @@ UploadImageStrip.prototype.upload = function( options ) {
 
 
 
+
+/**
+ * @method
+ * @private
+ * @returns {void}
+ */
+UploadImageStrip.prototype._evt_load_imgElem = function() {
+
+    this._placeholderElem.innerHTML = '';
+    this._parentElem.classList.add( 'active' );
+
+};
 
 /**
  * 
